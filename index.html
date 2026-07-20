@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FoodFusion | Premium Restaurant</title>
+    <meta
+      name="description"
+      content="FoodFusion is a premium restaurant experience featuring curated menus, master chefs, elegant reservations, and inspiring gallery moments."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0d0b08;
+        --surface: #17120f;
+        --text: #f7f0e8;
+        --muted: #bba48c;
+        --accent: #d5a24e;
+        --accent-dark: #a76d20;
+        --border: rgba(255, 255, 255, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        color: var(--text);
+        background: linear-gradient(135deg, #090706, var(--bg));
+        line-height: 1.6;
+      }
+
+      img {
+        width: 100%;
+        display: block;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        width: min(1120px, calc(100% - 2rem));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(14px);
+        background: rgba(13, 11, 8, 0.84);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.5rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        transition: transform 0.2s ease;
+      }
+
+      .brand:hover {
+        transform: translateY(-2px);
+      }
+
+      .brand-mark {
+        width: 2.4rem;
+        height: 2.4rem;
+        border-radius: 50%;
+        border: 1px solid rgba(213, 162, 78, 0.5);
+        background: linear-gradient(135deg, rgba(213, 162, 78, 0.95), rgba(167, 109, 32, 0.8));
+        display: grid;
+        place-items: center;
+        color: #111;
+        font-weight: 700;
+        font-size: 1rem;
+        box-shadow: 0 0 0 4px rgba(213, 162, 78, 0.14);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .brand:hover .brand-mark {
+        transform: rotate(8deg) scale(1.04);
+        box-shadow: 0 0 0 6px rgba(213, 162, 78, 0.2);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 1.2rem;
+        align-items: center;
+      }
+
+      .nav-links a {
+        color: var(--muted);
+        transition: color 0.2s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--text);
+      }
+
+      .menu-toggle {
+        display: none;
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 0.45rem 0.7rem;
+        border-radius: 8px;
+      }
+
+      .nav-links {
+        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+
+      .hero {
+        min-height: 92vh;
+        position: relative;
+        display: grid;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .hero video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(8, 7, 6, 0.9), rgba(8, 7, 6, 0.45));
+        z-index: 1;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 5rem 0;
+        max-width: 700px;
+      }
+
+      .hero-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.9rem;
+        padding: 0.8rem 1rem;
+        border: 1px solid rgba(255,255,255,0.16);
+        border-radius: 999px;
+        background: rgba(255,255,255,0.08);
+        backdrop-filter: blur(8px);
+        margin-bottom: 1.2rem;
+      }
+
+      .hero-brand-mark {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+        display: grid;
+        place-items: center;
+        color: #111;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        box-shadow: 0 0 0 6px rgba(213, 162, 78, 0.18);
+      }
+
+      .hero-brand-text {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .hero-brand-text strong {
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        font-size: 0.82rem;
+      }
+
+      .hero-brand-text span {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .eyebrow {
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Cormorant Garamond", serif;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 4.2vw, 4.4rem);
+        line-height: 1.05;
+        margin-bottom: 1rem;
+      }
+
+      .hero p {
+        color: #e8dccf;
+        font-size: 1.05rem;
+        margin-bottom: 2rem;
+      }
+
+      .btn-row {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        padding: 0.85rem 1.35rem;
+        font-weight: 600;
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+        color: #111;
+      }
+
+      .btn-secondary {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      section {
+        padding: 5rem 0;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .section-title h2 {
+        font-size: 2rem;
+      }
+
+      .section-title p {
+        color: var(--muted);
+        max-width: 560px;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .about-grid,
+      .card-grid,
+      .chef-grid,
+      .gallery-grid {
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .about-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+      }
+
+      .about-card,
+      .menu-card,
+      .chef-card,
+      .gallery-card,
+      .reservation-card {
+        background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.22);
+      }
+
+      .about-card {
+        padding: 2rem;
+      }
+
+      .about-card p {
+        color: #dfd2c3;
+        margin-bottom: 1rem;
+      }
+
+      .highlight-list {
+        list-style: none;
+        display: grid;
+        gap: 0.6rem;
+        color: var(--muted);
+      }
+
+      .highlight-list li::before {
+        content: "•";
+        color: var(--accent);
+        margin-right: 0.6rem;
+      }
+
+      .hero-image {
+        min-height: 360px;
+        background: url("https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=900&q=80") center/cover;
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .menu-card {
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .menu-image {
+        height: 220px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .menu-image::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.35) 100%);
+      }
+
+      .menu-image:hover {
+        transform: scale(1.03);
+        transition: transform 0.5s ease;
+      }
+
+      .menu-card .body {
+        padding: 1.4rem;
+      }
+
+      .menu-card h3 {
+        margin-bottom: 0.6rem;
+        font-size: 1.45rem;
+      }
+
+      .menu-price {
+        color: var(--accent);
+        font-weight: 700;
+        margin-bottom: 0.6rem;
+      }
+
+      .menu-card p {
+        color: var(--muted);
+        margin-bottom: 0.8rem;
+      }
+
+      .menu-card ul {
+        color: var(--muted);
+        padding-left: 1rem;
+        display: grid;
+        gap: 0.45rem;
+      }
+
+      .menu-detail-btn {
+        margin-top: 1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.7rem 1rem;
+        border-radius: 999px;
+        border: 1px solid var(--accent);
+        color: var(--accent);
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .menu-detail-btn:hover {
+        background: var(--accent);
+        color: #111;
+      }
+
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.78);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        z-index: 60;
+      }
+
+      .modal.open {
+        display: flex;
+      }
+
+      .modal-content {
+        width: min(720px, 100%);
+        border-radius: 24px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        background: var(--surface);
+      }
+
+      .modal-image {
+        height: 280px;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .modal-body {
+        padding: 1.5rem;
+      }
+
+      .modal-body p {
+        color: var(--muted);
+        margin: 0.7rem 0 1rem;
+      }
+
+      .modal-actions {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        margin-top: 0.6rem;
+      }
+
+      .modal-close,
+      .modal-book {
+        display: inline-flex;
+        padding: 0.7rem 1rem;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--text);
+        cursor: pointer;
+      }
+
+      .modal-book {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .modal-book:hover {
+        background: var(--accent);
+        color: #111;
+      }
+
+      .chef-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .chef-card img {
+        height: 260px;
+        object-fit: cover;
+      }
+
+      .chef-card .body {
+        padding: 1.3rem;
+      }
+
+      .chef-card .role {
+        color: var(--accent);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        margin-bottom: 0.4rem;
+      }
+
+      .reservation {
+        background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .reservation-card {
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 0;
+      }
+
+      .reservation-copy {
+        padding: 2rem;
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      .reservation-copy p {
+        color: var(--muted);
+        margin: 0.8rem 0 1.3rem;
+      }
+
+      .reservation-form {
+        padding: 2rem;
+        display: grid;
+        gap: 1rem;
+      }
+
+      .field {
+        display: grid;
+        gap: 0.4rem;
+      }
+
+      label {
+        font-size: 0.94rem;
+        color: #e3d2b8;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.05);
+        color: var(--text);
+        padding: 0.85rem 0.95rem;
+        border-radius: 12px;
+        font: inherit;
+      }
+
+      textarea {
+        min-height: 110px;
+        resize: vertical;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .gallery-card img {
+        height: 220px;
+        object-fit: cover;
+      }
+
+      .gallery-card .body {
+        padding: 1rem 1.1rem 1.2rem;
+      }
+
+      .gallery-card p {
+        color: var(--muted);
+      }
+
+      .toast {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        background: rgba(213, 162, 78, 0.95);
+        color: #111;
+        padding: 0.95rem 1.1rem;
+        border-radius: 999px;
+        box-shadow: 0 18px 36px rgba(0, 0, 0, 0.25);
+        opacity: 0;
+        transform: translateY(12px);
+        pointer-events: none;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        z-index: 40;
+      }
+
+      .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .history-panel {
+        margin-top: 1.5rem;
+        padding: 1.2rem;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .history-list {
+        display: grid;
+        gap: 0.75rem;
+        margin-top: 0.8rem;
+      }
+
+      .history-item {
+        padding: 0.8rem 0.9rem;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--muted);
+      }
+
+      .membership-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
+      }
+
+      .membership-card {
+        padding: 1.6rem;
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      }
+
+      .membership-card .price {
+        color: var(--accent);
+        font-size: 1.7rem;
+        font-weight: 700;
+        margin: 0.4rem 0 0.8rem;
+      }
+
+      .membership-card ul {
+        list-style: none;
+        display: grid;
+        gap: 0.6rem;
+        color: var(--muted);
+      }
+
+      .membership-card .join-btn {
+        margin-top: 1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1rem;
+        border-radius: 999px;
+        border: 1px solid var(--accent);
+        color: var(--accent);
+        font-weight: 600;
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+
+      .membership-card .join-btn:hover {
+        background: var(--accent);
+        color: #111;
+      }
+
+      .membership-card {
+        transition: transform 0.5s ease, box-shadow 0.5s ease;
+      }
+
+      .membership-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28);
+      }
+
+      .membership-card li::before {
+        content: "✦";
+        color: var(--accent);
+        margin-right: 0.6rem;
+      }
+
+      .login-panel {
+        padding: 2rem;
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        align-items: center;
+      }
+
+      .login-panel .panel-copy p {
+        color: var(--muted);
+        margin-top: 0.6rem;
+      }
+
+      .login-form {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .login-form .btn {
+        width: fit-content;
+      }
+
+      footer {
+        padding: 2rem 0 3rem;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      @media (max-width: 840px) {
+        .nav-links {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          top: 70px;
+          right: 1rem;
+          background: rgba(13, 11, 8, 0.96);
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          padding: 1rem;
+          width: min(220px, 90vw);
+          opacity: 0;
+          pointer-events: none;
+          transform: translateY(-8px);
+        }
+
+        .nav-links.open {
+          opacity: 1;
+          pointer-events: auto;
+          transform: translateY(0);
+        }
+
+        .menu-toggle {
+          display: inline-flex;
+        }
+
+        .about-grid,
+        .reservation-card,
+        .card-grid,
+        .chef-grid,
+        .gallery-grid,
+        .membership-grid,
+        .login-panel {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container nav">
+        <a class="brand" href="#home">
+          <span>FoodFusion</span>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+        <nav class="nav-links" id="navLinks">
+          <a href="#about">About</a>
+          <a href="#menu">Menu</a>
+          <a href="#chefs">Chefs</a>
+          <a href="#reservation">Reservation</a>
+          <a href="#gallery">Gallery</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80">
+          <source src="https://cdn.coverr.co/videos/coverr-cooking-on-the-stove-1560088748956/1080p.mp4" type="video/mp4" />
+        </video>
+        <div class="container hero-content">
+          <div class="hero-brand">
+            <div class="hero-brand-mark">FF</div>
+            <div class="hero-brand-text">
+              <strong>FoodFusion</strong>
+              <span>Crafted for the art of dining</span>
+            </div>
+          </div>
+          <p class="eyebrow">Luxury Dining • Signature Experiences</p>
+          <h1>Where timeless elegance meets unforgettable flavors.</h1>
+          <p>
+            Discover a palace-inspired dining journey with chef-led tasting menus,
+            curated pairings, and a setting designed for celebration.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#reservation">Reserve a Table</a>
+            <a class="btn btn-secondary" href="#menu">View Menus</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="container about-grid">
+          <div class="about-card">
+            <p class="eyebrow">Our Story</p>
+            <h2>Crafted for those who appreciate the finest details.</h2>
+            <p>
+              FoodFusion blends modern culinary artistry with the warmth of global hospitality.
+              Every plate, pour, and service moment is shaped to feel personal, expressive, and indulgent.
+            </p>
+            <ul class="highlight-list">
+              <li>Seasonal tasting menus inspired by global cuisine</li>
+              <li>Live chef-led preparation in an open-kitchen setting</li>
+              <li>Sommelier-selected wines and bespoke mocktails</li>
+            </ul>
+          </div>
+          <div class="hero-image"></div>
+        </div>
+      </section>
+
+      <section id="menu">
+        <div class="container">
+          <div class="section-title">
+            <h2>Signature Menus</h2>
+            <p>Thoughtfully composed to reflect comfort, luxury, and a bold culinary point of view.</p>
+          </div>
+          <div class="card-grid">
+            <article class="menu-card">
+              <div class="menu-image" style="background-image:url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80');"></div>
+              <div class="body">
+                <p class="eyebrow">Chef’s Tasting</p>
+                <h3>Palace Prelude</h3>
+                <p class="menu-price">$78 per guest</p>
+                <p>Elegant seafood and truffle-forward bites designed for a luxurious opening course.</p>
+                <ul>
+                  <li>Charred scallops with saffron beurre blanc</li>
+                  <li>Truffle ravioli with wild mushroom cream</li>
+                  <li>Vanilla bean panna cotta</li>
+                </ul>
+                <button class="menu-detail-btn" data-title="Palace Prelude" data-image="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80" data-desc="A signature opening tasting featuring delicate seafood, silky truffle pasta, and a luminous dessert course finished with vanilla bean cream." type="button">View Full Details</button>
+              </div>
+            </article>
+            <article class="menu-card">
+              <div class="menu-image" style="background-image:url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=900&q=80');"></div>
+              <div class="body">
+                <p class="eyebrow">Fine Dining</p>
+                <h3>Royal Supper</h3>
+                <p class="menu-price">$112 per guest</p>
+                <p>Rich textures, premium cuts, and dramatic presentation for an unforgettable evening.</p>
+                <ul>
+                  <li>Wagyu tenderloin with red wine jus</li>
+                  <li>Smoked aubergine caviar and brioche</li>
+                  <li>Dark chocolate soufflé with citrus glaze</li>
+                </ul>
+                <button class="menu-detail-btn" data-title="Royal Supper" data-image="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=900&q=80" data-desc="An indulgent fine-dining experience with rich, layered flavors and a dramatic finale of chocolate and citrus." type="button">View Full Details</button>
+              </div>
+            </article>
+            <article class="menu-card">
+              <div class="menu-image" style="background-image:url('https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=900&q=80');"></div>
+              <div class="body">
+                <p class="eyebrow">Private Dining</p>
+                <h3>Imperial Feast</h3>
+                <p class="menu-price">Custom</p>
+                <p>Custom-crafted celebrations with live stations and indulgent pairings for your group.</p>
+                <ul>
+                  <li>Chef’s selection of canapés and amuse-bouches</li>
+                  <li>Live carving and bespoke dessert stations</li>
+                  <li>Premium pairings curated for your event</li>
+                </ul>
+                <button class="menu-detail-btn" data-title="Imperial Feast" data-image="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=900&q=80" data-desc="A celebratory private dining spread designed for groups seeking a show-stopping culinary experience with custom service." type="button">View Full Details</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="chefs">
+        <div class="container">
+          <div class="section-title">
+            <h2>Meet the Culinary Team</h2>
+            <p>Our chefs bring precision, passion, and a global palate to every seat at the table.</p>
+          </div>
+          <div class="chef-grid">
+            <article class="chef-card">
+              <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80" alt="Chef preparing food" />
+              <div class="body">
+                <p class="role">Executive Chef</p>
+                <h3>Aria Laurent</h3>
+                <p>Crafting artful plates rooted in heritage, technique, and seasonal elegance.</p>
+              </div>
+            </article>
+            <article class="chef-card">
+              <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=80" alt="Chef plating a dish" />
+              <div class="body">
+                <p class="role">Pastry Maestro</p>
+                <h3>Julian Voss</h3>
+                <p>Known for dramatic desserts that balance richness, fragrance, and delicate texture.</p>
+              </div>
+            </article>
+            <article class="chef-card">
+              <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?auto=format&fit=crop&w=800&q=80" alt="Chef at the grill" />
+              <div class="body">
+                <p class="role">Head of Hospitality</p>
+                <h3>Meera Shah</h3>
+                <p>Elevating service with a warm, polished approach inspired by premium luxury hotels.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="reservation" id="reservation">
+        <div class="container">
+          <div class="reservation-card">
+            <div class="reservation-copy">
+              <p class="eyebrow">Reservations</p>
+              <h2>Book an evening of indulgence</h2>
+              <p>
+                Whether it is an intimate dinner or a grand celebration, our team will curate your experience with care.
+              </p>
+              <ul class="highlight-list">
+                <li>Open nightly from 5:00 PM to 11:30 PM</li>
+                <li>Private dining rooms available for up to 20 guests</li>
+                <li>Preferred dress code: evening chic</li>
+              </ul>
+            </div>
+            <form class="reservation-form">
+              <div class="field">
+                <label for="name">Full Name</label>
+                <input id="name" name="name" placeholder="Your name" required />
+              </div>
+              <div class="field">
+                <label for="date">Date</label>
+                <input id="date" name="date" type="date" required />
+              </div>
+              <div class="field">
+                <label for="guests">Guests</label>
+                <select id="guests" name="guests">
+                  <option>2 Guests</option>
+                  <option>4 Guests</option>
+                  <option>6 Guests</option>
+                  <option>8+ Guests</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="notes">Special Requests</label>
+                <textarea id="notes" name="notes" placeholder="Tell us about your occasion"></textarea>
+              </div>
+              <button class="btn btn-primary" type="submit">Request Reservation</button>
+              <p id="feedback" style="color: var(--accent); min-height: 1.2rem;"></p>
+              <div class="history-panel">
+                <h3>Recent Reservations</h3>
+                <div class="history-list" id="historyList">
+                  <p>No reservations yet.</p>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="membership">
+        <div class="container">
+          <div class="section-title">
+            <h2>Membership Types</h2>
+            <p>Choose a membership that brings you closer to our chef’s table, private experiences, and exclusive surprises.</p>
+          </div>
+          <div class="membership-grid">
+            <article class="membership-card">
+              <p class="eyebrow">Starter</p>
+              <h3>Silver Circle</h3>
+              <p class="price">$99 / year</p>
+              <ul>
+                <li>Priority reservations</li>
+                <li>Monthly chef’s table invites</li>
+                <li>10% off select menus</li>
+              </ul>
+              <a class="join-btn" href="#reservation">Join Membership</a>
+            </article>
+            <article class="membership-card">
+              <p class="eyebrow">Most Loved</p>
+              <h3>Gold Reserve</h3>
+              <p class="price">$249 / year</p>
+              <ul>
+                <li>Complimentary welcome tasting</li>
+                <li>VIP lounge access</li>
+                <li>Exclusive seasonal events</li>
+              </ul>
+              <a class="join-btn" href="#reservation">Join Membership</a>
+            </article>
+            <article class="membership-card">
+              <p class="eyebrow">Elite</p>
+              <h3>Platinum Signature</h3>
+              <p class="price">$499 / year</p>
+              <ul>
+                <li>Private dining credits</li>
+                <li>Chef-led culinary experience</li>
+                <li>Dedicated concierge service</li>
+              </ul>
+              <a class="join-btn" href="#reservation">Join Membership</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="login">
+        <div class="container">
+          <div class="login-panel">
+            <div class="panel-copy">
+              <p class="eyebrow">Member Access</p>
+              <h2>Sign in to your FoodFusion account</h2>
+              <p>Manage reservations, view memberships, and enjoy exclusive dining updates.</p>
+            </div>
+            <form class="login-form">
+              <div class="field">
+                <label for="email">Email Address</label>
+                <input id="email" name="email" type="email" placeholder="you@example.com" required />
+              </div>
+              <div class="field">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" placeholder="Enter password" required />
+              </div>
+              <button class="btn btn-primary" type="submit">Login</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="gallery">
+        <div class="container">
+          <div class="section-title">
+            <h2>Dining Moments</h2>
+            <p>From candlelit interiors to plated artistry, every corner of FoodFusion is designed to impress.</p>
+          </div>
+          <div class="gallery-grid">
+            <article class="gallery-card">
+              <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=80" alt="Elegant restaurant interior" />
+              <div class="body">
+                <h3>Palatial Interiors</h3>
+                <p>Soft lighting, velvet textures, and sculptural details.</p>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80" alt="Gourmet plated dish" />
+              <div class="body">
+                <h3>Signature Plates</h3>
+                <p>Elegant presentations that marry color, aroma, and refinement.</p>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=900&q=80" alt="Cocktails at a restaurant" />
+              <div class="body">
+                <h3>Curated Pairings</h3>
+                <p>Crafted beverages that complement each course beautifully.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>© <span id="year"></span> FoodFusion — Premium Dining, Reimagined</p>
+      </div>
+    </footer>
+
+    <div class="toast" id="toast"></div>
+
+    <div class="modal" id="menuModal" role="dialog" aria-modal="true" aria-label="Menu details">
+      <div class="modal-content">
+        <div class="modal-image" id="modalImage"></div>
+        <div class="modal-body">
+          <p class="eyebrow">Menu Detail</p>
+          <h3 id="modalTitle"></h3>
+          <p id="modalDesc"></p>
+          <div class="modal-actions">
+            <button class="modal-book" id="bookMenu" type="button">Book This Menu</button>
+            <button class="modal-close" id="closeModal" type="button">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const toggle = document.getElementById("menuToggle");
+      const navLinks = document.getElementById("navLinks");
+      const feedback = document.getElementById("feedback");
+      const reservationForm = document.querySelector(".reservation-form");
+      const toast = document.getElementById("toast");
+      const historyList = document.getElementById("historyList");
+      const menuModal = document.getElementById("menuModal");
+      const modalImage = document.getElementById("modalImage");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalDesc = document.getElementById("modalDesc");
+      const closeModal = document.getElementById("closeModal");
+      const bookMenu = document.getElementById("bookMenu");
+
+      document.querySelectorAll(
+        ".hero-content, .section-title, .about-card, .hero-image, .menu-card, .chef-card, .gallery-card, .reservation-card, .membership-card"
+      ).forEach((element) => element.classList.add("reveal"));
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+
+      toggle?.addEventListener("click", () => {
+        navLinks.classList.toggle("open");
+      });
+
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          if (window.innerWidth <= 840) {
+            navLinks.classList.remove("open");
+          }
+        });
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 840) {
+          navLinks.classList.remove("open");
+        }
+      });
+
+      const showToast = (message) => {
+        toast.textContent = message;
+        toast.classList.add("show");
+        clearTimeout(showToast.timeout);
+        showToast.timeout = setTimeout(() => toast.classList.remove("show"), 3000);
+      };
+
+      const refreshHistory = async () => {
+        try {
+          const response = await fetch("http://127.0.0.1:8000/api/reservations");
+          const result = await response.json();
+          if (!response.ok) throw new Error("Unable to load reservations.");
+
+          if (!result.reservations || result.reservations.length === 0) {
+            historyList.innerHTML = '<p>No reservations yet.</p>';
+            return;
+          }
+
+          historyList.innerHTML = result.reservations
+            .slice(-4)
+            .reverse()
+            .map(
+              (entry) => `
+                <div class="history-item">
+                  <strong>${entry.name}</strong> • ${entry.date} • ${entry.guests}<br />
+                  <span>${entry.notes || "No special requests"}</span>
+                </div>
+              `
+            )
+            .join("");
+        } catch (error) {
+          historyList.innerHTML = '<p>Unable to load recent reservations.</p>';
+        }
+      };
+
+      document.querySelectorAll(".menu-detail-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+          modalTitle.textContent = button.dataset.title;
+          modalDesc.textContent = button.dataset.desc;
+          modalImage.style.backgroundImage = `url('${button.dataset.image}')`;
+          menuModal.classList.add("open");
+        });
+      });
+
+      closeModal?.addEventListener("click", () => menuModal.classList.remove("open"));
+      bookMenu?.addEventListener("click", () => {
+        menuModal.classList.remove("open");
+        document.getElementById("reservation").scrollIntoView({ behavior: "smooth" });
+        const notesField = document.getElementById("notes");
+        if (notesField) {
+          notesField.value = `Preferred menu: ${modalTitle.textContent}`;
+        }
+        showToast(`Booking request prepared for ${modalTitle.textContent}`);
+      });
+      menuModal?.addEventListener("click", (event) => {
+        if (event.target === menuModal) {
+          menuModal.classList.remove("open");
+        }
+      });
+
+      reservationForm?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const submitButton = reservationForm.querySelector("button[type='submit']");
+        const formData = new FormData(reservationForm);
+        const payload = Object.fromEntries(formData.entries());
+
+        feedback.textContent = "Submitting your reservation request...";
+        submitButton.disabled = true;
+
+        try {
+          const response = await fetch("http://127.0.0.1:8000/api/reservations", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          const result = await response.json();
+
+          if (!response.ok) {
+            throw new Error(result.error || "Unable to complete reservation request.");
+          }
+
+          feedback.textContent = result.message;
+          showToast("Reservation request received!");
+          reservationForm.reset();
+          await refreshHistory();
+        } catch (error) {
+          feedback.textContent = error.message;
+          showToast(error.message);
+        } finally {
+          submitButton.disabled = false;
+        }
+      });
+
+      refreshHistory();
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
