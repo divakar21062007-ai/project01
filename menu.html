@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Menu Details</title>
+    <style>
+      body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial;margin:0;color:#222}
+      .hero{height:320px;background-size:cover;background-position:center}
+      .container{max-width:980px;margin:24px auto;padding:0 16px}
+      .back{display:inline-block;margin-bottom:12px;text-decoration:none;color:#0366d6}
+      .title{font-size:28px;margin:8px 0}
+      .desc{color:#444}
+      .actions{margin-top:18px}
+      .btn{display:inline-block;padding:10px 14px;background:#111;color:#fff;text-decoration:none;border-radius:6px}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a class="back" href="index.html#menu">← Back to Menus</a>
+      <div id="hero" class="hero"></div>
+      <h1 id="title" class="title">Menu</h1>
+      <p id="desc" class="desc"></p>
+      <div class="actions">
+        <a id="bookBtn" class="btn" href="index.html#reservation">Book This Menu</a>
+      </div>
+    </div>
+
+    <script>
+      const qs = new URLSearchParams(window.location.search);
+      const title = qs.get('title') || '';
+      const desc = qs.get('desc') || '';
+      const image = qs.get('image') || '';
+
+      document.getElementById('title').textContent = title;
+      document.getElementById('desc').textContent = desc;
+      if (image) document.getElementById('hero').style.backgroundImage = `url('${decodeURIComponent(image)}')`;
+
+      // Prefill reservation notes when "Book This Menu" is clicked
+      const bookBtn = document.getElementById('bookBtn');
+      bookBtn.addEventListener('click', (e) => {
+        // append a short fragment to help the reservation form prefill if index.html supports it
+        const pref = title ? `?menu=${encodeURIComponent(title)}` : '';
+        bookBtn.href = `index.html#reservation${pref}`;
+      });
+    </script>
+  </body>
+</html>
